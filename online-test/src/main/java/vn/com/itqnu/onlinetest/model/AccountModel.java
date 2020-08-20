@@ -18,6 +18,18 @@ public class AccountModel {
 	public AccountModel() {
 	}
 
+	// Constructor for create account
+	public AccountModel(String fullName, Date birthday, boolean gender, String email, String phone, String address) {
+		super();
+		this.fullName = fullName;
+		this.birthday = birthday;
+		this.gender = gender;
+		this.email = email;
+		this.phone = phone;
+		this.address = address;
+	}
+
+	// Constructor for get account
 	public AccountModel(Long id, String username, String password, String fullName, Date birthday, boolean gender,
 			String email, String phone, String address, int roleId) {
 		super();
