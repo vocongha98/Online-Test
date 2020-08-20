@@ -1,14 +1,10 @@
-package vn.com.itqnu.onlinetest.entity;
+package vn.com.itqnu.onlinetest.model;
 
 import java.util.Date;
 
-import javax.persistence.Entity;
-import javax.persistence.Table;
+public class AccountModel {
 
-@Entity
-@Table(name = "tbl_account")
-public class Account extends BaseEntity {
-
+	private Long id;
 	private String username;
 	private String password;
 	private String fullName;
@@ -18,6 +14,32 @@ public class Account extends BaseEntity {
 	private String phone;
 	private String address;
 	private int roleId;
+
+	public AccountModel() {
+	}
+
+	public AccountModel(Long id, String username, String password, String fullName, Date birthday, boolean gender,
+			String email, String phone, String address, int roleId) {
+		super();
+		this.id = id;
+		this.username = username;
+		this.password = password;
+		this.fullName = fullName;
+		this.birthday = birthday;
+		this.gender = gender;
+		this.email = email;
+		this.phone = phone;
+		this.address = address;
+		this.roleId = roleId;
+	}
+
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
 
 	public String getUsername() {
 		return username;
