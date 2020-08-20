@@ -7,5 +7,5 @@ import vn.com.itqnu.onlinetest.entity.Answer;
 
 @Repository
 public interface AnswerRepository extends JpaRepository<Answer, Long> {
-
+	Answer findByAnswerName(String answerName);
 }
