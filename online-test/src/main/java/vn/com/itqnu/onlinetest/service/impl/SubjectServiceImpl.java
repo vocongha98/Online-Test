@@ -1,6 +1,8 @@
 package vn.com.itqnu.onlinetest.service.impl;
 
+import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.stereotype.Service;
 
@@ -20,32 +22,68 @@ public class SubjectServiceImpl implements SubjectService {
 
 	@Override
 	public Subject createSubject(SubjectModel subjectModel) {
-		// TODO Auto-generated method stub
-		return null;
+		if (subjectModel.getSubjectName() == null || subjectModel.getSubjectName().trim().length() == 0) {
+			throw new RuntimeException("Subject name is required!");
+		}
+
+		//
+
+		Subject subject = new Subject();
+		subject.setSubjectName(subjectModel.getSubjectName());
+		subject.setCreditNumber(subjectModel.getCreditNumber());
+		subject.setDescription(subjectModel.getDescription());
+
+		subject.setCreatedBy("ADMIN");
+		subject.setCreatedDate(new Date());
+		subject.setModifiedBy("ADMIN");
+		subject.setModifiedDate(new Date());
+
+		subjectRepository.save(subject);
+		
+		return subject;
 	}
 
 	@Override
 	public List<Subject> getAllSubject() {
-		// TODO Auto-generated method stub
-		return null;
+		return subjectRepository.findAll();
 	}
 
 	@Override
 	public Subject getSubjectById(Long idSubject) {
-		// TODO Auto-generated method stub
+		Optional<Subject> optional = subjectRepository.findById(idSubject);
+		if (optional != null && optional.isPresent()) {
+			return optional.get();
+		}
 		return null;
 	}
 
 	@Override
 	public Subject updateSubject(SubjectModel subjectModel) {
-		// TODO Auto-generated method stub
-		return null;
+		Subject subject = getSubjectById(subjectModel.getId());
+		if (subject == null) {
+			throw new RuntimeException("Subject does not exits!");
+		}
+		subject.setSubjectName(subjectModel.getSubjectName());
+		subject.setCreditNumber(subjectModel.getCreditNumber());
+		subject.setDescription(subjectModel.getDescription());
+		
+		subject.setModifiedBy("ADMIN");
+		subject.setModifiedDate(new Date());
+
+		subjectRepository.save(subject);
+
+		return subject;
+
 	}
 
 	@Override
 	public void deleteSubject(Long idSubject) {
-		// TODO Auto-generated method stub
+		Subject subject = getSubjectById(idSubject);
 
+		if (subject == null) {
+			throw new RuntimeException("Subject does not exits!");
+		}
+		subjectRepository.delete(subject);
 	}
 
 }
