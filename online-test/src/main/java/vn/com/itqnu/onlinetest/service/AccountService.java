@@ -11,7 +11,7 @@ public interface AccountService {
 	Account checkUsernameAndPassword(String username, String password);
 	
 	// create
-	AccountModel createAccount(AccountModel accountModel);
+	Account createAccount(AccountModel accountModel);
 
 	// select
 	List<Account> getAllAccount();
@@ -19,7 +19,7 @@ public interface AccountService {
 	Account getAccountById(Long idAccount);
 
 	// update
-	AccountModel updateAccount(AccountModel accountModel);
+	Account updateAccount(AccountModel accountModel);
 
 	// delete
 	void deleteAccount(Long idAccount);

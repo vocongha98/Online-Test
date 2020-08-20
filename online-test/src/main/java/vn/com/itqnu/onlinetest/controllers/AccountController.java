@@ -7,11 +7,14 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import vn.com.itqnu.onlinetest.entity.Account;
+import vn.com.itqnu.onlinetest.model.AccountModel;
 import vn.com.itqnu.onlinetest.service.AccountService;
 
 @RestController
@@ -34,6 +37,15 @@ public class AccountController {
 		}
 	}
 
+	@PostMapping()
+	public ResponseEntity<?> createAccount(@RequestBody AccountModel accountModel) {
+		try {
+			return ResponseEntity.ok(accountService.createAccount(accountModel));
+		} catch (Exception e) {
+			return ResponseEntity.status(500).body(e.getMessage());
+		}
+	}
+
 	@GetMapping
 	public List<Account> getAllAccount() {
 		return accountService.getAllAccount();
@@ -42,6 +54,15 @@ public class AccountController {
 	@GetMapping("/{id}")
 	public Account getAccountById(@PathVariable(name = "id") Long idAccount) {
 		return accountService.getAccountById(idAccount);
+	}
+
+	@PutMapping
+	public ResponseEntity<?> updateAccount(@RequestBody AccountModel accountModel) {
+		try {
+			return ResponseEntity.ok(accountService.updateAccount(accountModel));
+		} catch (Exception e) {
+			return ResponseEntity.status(500).body(e.getMessage());
+		}
 	}
 
 	@DeleteMapping("/{id}")
