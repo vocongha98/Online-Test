@@ -8,4 +8,5 @@ import vn.com.itqnu.onlinetest.entity.Subject;
 @Repository
 public interface SubjectRepository extends JpaRepository<Subject, Long> {
 
+	Subject findBySubjectName(String subjectName);
 }
